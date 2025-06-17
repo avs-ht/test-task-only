@@ -23,7 +23,7 @@ export const HistoryDatesSection = ({
 
   const { width: windowWidth } = useWindowSize();
   const radius = useClampValue(150, 520, 265, 1920);
-  const [activeIndex, setActiveIndex] = useState(sections.length - 1);
+  const [activeIndex, setActiveIndex] = useState(0);
   const activeSection = sections[activeIndex] ?? sections[0];
   const isCircleSelectVisible = windowWidth > 420;
 

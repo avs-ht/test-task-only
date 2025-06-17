@@ -32,7 +32,7 @@ export const CircleSelect = ({
   const FIXED_ANGLE = 30;
   const basePositions = useBasePointPositions(sections.length);
   const [rotation, setRotation] = useState(() =>
-    getRotationForIndex(activeIndex, sections.length, FIXED_ANGLE)
+    getRotationForIndex(0, sections.length, FIXED_ANGLE)
   );
 
   const animationRef = useRef<gsap.core.Tween | null>(null);
