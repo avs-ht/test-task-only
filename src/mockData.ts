@@ -1,6 +1,4 @@
-import { HistorySection } from "./components/HistoryDatesSection";
-
-export const HISTORY_SECTIONS: HistorySection[] = [
+export const HISTORY_SECTIONS = [
   {
     circleTitle: "Наука",
     events: [

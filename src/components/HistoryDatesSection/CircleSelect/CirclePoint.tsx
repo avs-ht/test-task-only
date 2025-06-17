@@ -1,7 +1,7 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import styles from "./CirclePoint.module.scss";
+import { HistorySection } from "../types";
 
-import { HistorySection } from "..";
 interface ICirclePointProps {
   index: number;
   sectionId: HistorySection;
@@ -13,49 +13,51 @@ interface ICirclePointProps {
   activePointSize: number;
   clickFn: (index: number) => void;
 }
-export const CirclePoint = (props: ICirclePointProps) => {
+
+export const CirclePoint = ({
+  index,
+  sectionId,
+  isAnimateEnded,
+  activeIndex,
+  x,
+  y,
+  pointSize,
+  activePointSize,
+  clickFn,
+}: ICirclePointProps) => {
   const [isHovered, setHovered] = useState(false);
-
-  const {
-    sectionId,
-    index,
-    activeIndex,
-    x,
-    y,
-    pointSize,
-    activePointSize,
-    clickFn,
-    isAnimateEnded,
-  } = props;
-
-  const isActivePoint = index === activeIndex || isHovered;
-
   const pointRef = useRef<HTMLDivElement | null>(null);
-  const diametr = isActivePoint ? activePointSize : pointSize;
+
+  const isActive = index === activeIndex || isHovered;
+  const isActivated = isAnimateEnded && index === activeIndex;
+  const diameter = isActive ? activePointSize : pointSize;
+  const title = isActive ? sectionId.circleTitle : "";
+
+  const handleClick = () => clickFn(index);
+  const handleMouseEnter = () => setHovered(true);
+  const handleMouseLeave = () => setHovered(false);
+
+  const classNames = [
+    styles.point,
+    isActive && styles.pointActive,
+    isActivated && styles.activatedPoint,
+  ]
+    .filter(Boolean)
+    .join(" ");
 
   return (
     <div
       ref={pointRef}
-      key={sectionId.circleTitle}
-      className={`${styles.point} ${isActivePoint ? styles.pointActive : ""} ${
-        isAnimateEnded && index === activeIndex ? styles.activatedPoint : ""
-      }`}
-      style={{
-        left: x,
-        top: y,
-        width: diametr,
-        height: diametr,
-      }}
-      onClick={() => {
-        clickFn(index);
-      }}
-      data-title={isActivePoint ? sectionId.circleTitle : ""}
+      className={classNames}
+      style={{ left: x, top: y, width: diameter, height: diameter }}
+      onClick={handleClick}
+      data-title={title}
     >
-      {isActivePoint ? index + 1 : undefined}
+      {isActive ? index + 1 : null}
       <div
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)}
         className={styles.clickArea}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
         style={{
           width: activePointSize,
           height: activePointSize,

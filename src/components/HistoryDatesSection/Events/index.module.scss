@@ -69,3 +69,12 @@
     right: 0;
   }
 }
+.sectionTitle {
+  margin-bottom: 30px;
+  font-weight: bold;
+  font-size: 1.25rem;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+}

@@ -1,20 +1,12 @@
-import { useEffect, useState } from "react";
-import { useClampValue } from "../../hooks/useClampValue";
+import { useState } from "react";
+import { useClampValue } from "@hooks/useClampValue";
 import { CircleSelect } from "./CircleSelect";
 import { EarlyAndLateDates } from "./EarlyAndLateDates";
-import { useWindowSize } from "../../hooks/useWindowSize";
+import { useWindowSize } from "@hooks/useWindowSize";
 import { Slider } from "./Slider";
 import { Events } from "./Events";
 import styles from "./index.module.scss";
-
-export interface HistoryEvent {
-  year: number;
-  description: string;
-}
-export interface HistorySection {
-  circleTitle: string;
-  events: HistoryEvent[];
-}
+import { HistorySection } from "./types";
 
 interface IHistoryDatesSectionProps {
   sections: HistorySection[];
@@ -29,12 +21,12 @@ export const HistoryDatesSection = ({
     );
   }
 
-  const radius = useClampValue(150, 520, 265, 1920);
   const { width: windowWidth } = useWindowSize();
+  const radius = useClampValue(150, 520, 265, 1920);
   const [activeIndex, setActiveIndex] = useState(sections.length - 1);
-  const activeSection = sections[activeIndex];
+  const activeSection = sections[activeIndex] ?? sections[0];
+  const isCircleSelectVisible = windowWidth > 420;
 
-  useEffect(() => {}, [activeIndex]);
   return (
     <section className={styles.container}>
       <h2 className={styles.sectionTitle}>
@@ -42,7 +34,8 @@ export const HistoryDatesSection = ({
         <br />
         даты
       </h2>
-      {windowWidth > 420 && (
+
+      {isCircleSelectVisible && (
         <div className={styles.selectContainer}>
           <CircleSelect
             sections={sections}
@@ -52,15 +45,21 @@ export const HistoryDatesSection = ({
           />
         </div>
       )}
+
       <EarlyAndLateDates activeSection={activeSection} />
+
       <div className={styles.downPart}>
         <Slider
           activeIndex={activeIndex}
           itemsLength={sections.length}
           setActiveIndex={setActiveIndex}
         />
-        <Events events={activeSection.events} />
+        <Events
+          events={activeSection.events}
+          sectionTitle={activeSection.circleTitle}
+        />
       </div>
     </section>
   );
 };
+export { HistorySection };

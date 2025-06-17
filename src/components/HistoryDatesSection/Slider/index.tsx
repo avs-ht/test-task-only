@@ -1,17 +1,28 @@
-import { useMediaQuery } from "../../../hooks/useMediaQuery";
-import { LeftArrow } from "../../../icons/LeftArrow";
+import { useMediaQuery } from "@hooks/useMediaQuery";
+import { LeftArrow } from "@icons/LeftArrow";
 import styles from "./index.module.scss";
+
 interface ISliderProps {
   activeIndex: number;
   itemsLength: number;
   setActiveIndex: (idx: number) => void;
 }
+
 export const Slider = ({
   activeIndex,
   itemsLength,
   setActiveIndex,
 }: ISliderProps) => {
   const isDotsDisplayed = useMediaQuery("(max-width: 540px)");
+
+  const handlePrev = () => {
+    if (activeIndex > 0) setActiveIndex(activeIndex - 1);
+  };
+
+  const handleNext = () => {
+    if (activeIndex < itemsLength - 1) setActiveIndex(activeIndex + 1);
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.arrows}>
@@ -21,14 +32,14 @@ export const Slider = ({
         </p>
         <div className={styles.buttons}>
           <button
-            onClick={() => setActiveIndex(activeIndex - 1)}
+            onClick={handlePrev}
             className={styles.prevButton}
             disabled={activeIndex === 0}
           >
             <LeftArrow />
           </button>
           <button
-            onClick={() => setActiveIndex(activeIndex + 1)}
+            onClick={handleNext}
             className={styles.nextButton}
             disabled={activeIndex === itemsLength - 1}
           >
@@ -36,18 +47,18 @@ export const Slider = ({
           </button>
         </div>
       </div>
+
       {isDotsDisplayed && (
         <div className={styles.dots}>
-          {Array.from({ length: itemsLength }).map((_, idx) => {
-            return (
-              <div
-                className={`${styles.dot} ${
-                  activeIndex === idx && styles.activeDot
-                }`}
-                onClick={() => setActiveIndex(idx)}
-              />
-            );
-          })}
+          {Array.from({ length: itemsLength }).map((_, idx) => (
+            <div
+              key={idx}
+              className={`${styles.dot} ${
+                activeIndex === idx ? styles.activeDot : ""
+              }`}
+              onClick={() => setActiveIndex(idx)}
+            />
+          ))}
         </div>
       )}
     </div>

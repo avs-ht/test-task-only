@@ -10,6 +10,11 @@ module.exports = {
     clean: true,
   },
   resolve: {
+    alias: {
+      "@components": path.resolve(__dirname, "src/components/"),
+      "@hooks": path.resolve(__dirname, "src/hooks/"),
+      "@icons": path.resolve(__dirname, "src/icons/"),
+    },
     extensions: [".tsx", ".ts", ".js"],
   },
   devtool: "source-map",
