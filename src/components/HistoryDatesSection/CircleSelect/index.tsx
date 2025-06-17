@@ -36,7 +36,7 @@ export const CircleSelect = ({
   );
 
   const animationRef = useRef<gsap.core.Tween | null>(null);
-  const prevActiveIndexRef = useRef(activeIndex);
+  const prevActiveIndexRef = useRef(0);
 
   const animateToIndex = (index: number) => {
     setAnimateEnded(false);
