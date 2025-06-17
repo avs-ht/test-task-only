@@ -1,0 +1,19 @@
+.wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.circle {
+  position: absolute;
+  background-color: transparent;
+  border: 2px solid color-mix(in srgb, var(--black-blue) 10%, transparent);
+  border-radius: 50%;
+  box-sizing: border-box;
+}

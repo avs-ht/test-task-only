@@ -1,0 +1,45 @@
+.lateDate,
+.earlyDate {
+  line-height: 160px;
+  font-size: clamp(7.8125rem, 6.0714rem + 5.3571vw, 12.5rem);
+  font-weight: bold;
+  letter-spacing: -2%;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: 10;
+  @media (max-width: 1000px) {
+    font-size: clamp(4.375rem, -1.0417rem + 16.6667vw, 9.375rem);
+  }
+  @media (max-width: 420px) {
+    font-size: 3.25rem;
+    position: static;
+    line-height: 1;
+    transform: translateY(0);
+    --iris: var(--blue);
+    --fuschia: #f178b6;
+  }
+}
+
+.earlyDate {
+  color: var(--iris);
+  right: calc(50% + 62px);
+  @media (max-width: 700px) {
+    right: calc(50% + 22px);
+  }
+}
+.lateDate {
+  color: var(--fuschia);
+  left: calc(50% + 22px);
+}
+.datesContainer {
+  display: contents;
+  @media (max-width: 420px) {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    margin-bottom: 57px;
+  }
+}

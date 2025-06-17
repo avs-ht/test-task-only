@@ -1,0 +1,72 @@
+.itemsAmount {
+  font-size: 0.875rem;
+  margin-bottom: 14px;
+  @media (max-width: 540px) {
+    margin-bottom: 10px;
+  }
+}
+
+.buttons {
+  display: flex;
+  gap: 20px;
+  @media (max-width: 420px) {
+    gap: 8px;
+  }
+}
+.nextButton,
+.prevButton {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 9999px;
+  border: 1px solid color-mix(in srgb, var(--black-blue) 50%, transparent);
+  color: var(--black-blue);
+  &:disabled {
+    opacity: 0.5;
+  }
+  @media (max-width: 540px) {
+    width: clamp(1.5625rem, -0.9375rem + 12.5vw, 3.125rem);
+    height: clamp(1.5625rem, -0.9375rem + 12.5vw, 3.125rem);
+  }
+  @media (max-width: 420px) {
+    svg {
+      scale: 0.5;
+    }
+  }
+}
+.nextButton {
+  transform: rotate(180deg);
+}
+
+.container {
+  @media (max-width: 540px) {
+    order: 3;
+    display: flex;
+    align-items: center;
+    gap: 40px;
+  }
+}
+.dots {
+  display: flex;
+  gap: 10px;
+  cursor: pointer;
+
+  .dot {
+    background-color: var(--black-blue);
+    opacity: 40%;
+    width: 6px;
+    height: 6px;
+    border-radius: 9999px;
+    &.activeDot {
+      opacity: 1;
+    }
+  }
+}
+.arrows {
+  display: contents;
+  @media (max-width: 540px) {
+    display: block;
+  }
+}

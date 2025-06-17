@@ -1,0 +1,71 @@
+.container {
+  position: relative;
+  @media (max-width: 540px) {
+    padding-top: 20px;
+    border-top: 1px solid #c7cdd9;
+    display: flex !important;
+    flex-direction: row;
+  }
+}
+.swiper {
+  max-width: 90%;
+  justify-self: start;
+  margin-inline: 0;
+  .slide {
+    max-width: 320px;
+    @media (max-width: 530px) {
+      min-width: 320px;
+      max-width: none;
+    }
+    .year {
+      color: var(--blue);
+      font-family: "Bebas Neue";
+      font-size: 1.5625rem;
+      line-height: 120%;
+    }
+    .description {
+      min-height: 90px;
+      max-height: 90px;
+      overflow-y: hidden;
+      text-overflow: ellipsis;
+
+      font-size: 1.25rem;
+      line-height: 30px;
+      overflow: hidden;
+    }
+  }
+  @media (max-width: 540px) {
+    margin-bottom: 78px;
+  }
+}
+.nextButton,
+.prevButton {
+  width: 40px;
+  height: 40px;
+  border-radius: 9999px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  box-shadow: 0 0 15px 0 color-mix(in srgb, var(--blue) 10%, transparent);
+  svg path {
+    stroke: var(--blue);
+  }
+}
+
+.prevButton {
+  left: -60px;
+}
+.nextButton {
+  right: 40px;
+  transform: translateY(-50%) rotate(180deg);
+
+  @media (max-width: 1024px) {
+    right: 20px;
+  }
+  @media (max-width: 800px) {
+    right: 0;
+  }
+}
